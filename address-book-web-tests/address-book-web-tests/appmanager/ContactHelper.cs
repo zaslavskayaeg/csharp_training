@@ -35,14 +35,18 @@ namespace WebAddressbookTests
             return this;
         }
 
-        private void SubmitСontactModification()
+        private ContactHelper SubmitСontactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+
+            return this;
         }
 
-        private void InitContactModification()
+        private ContactHelper InitContactModification()
         {
             driver.FindElement(By.XPath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img")).Click();
+
+            return this;
         }
 
         public ContactHelper SelectContact(int index)
