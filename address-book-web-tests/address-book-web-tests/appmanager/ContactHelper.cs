@@ -16,12 +16,57 @@ namespace WebAddressbookTests
         {
         }
 
-        internal void Create(ContactData contact)
+        public ContactHelper Remove(int i)
+        {
+            SelectContact(i);
+            RemoveContact();
+
+            return this;
+        }
+
+        internal ContactHelper Modify(ContactData contact, int i)
+        {
+            SelectContact(i);
+            InitContactModification();
+            FillContactForm(contact);
+            SubmitСontactModification();
+            ReternToHomePage();
+
+            return this;
+        }
+
+        private void SubmitСontactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+        }
+
+        private void InitContactModification()
+        {
+            driver.FindElement(By.XPath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img")).Click();
+        }
+
+        public ContactHelper SelectContact(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+
+            return this;
+        }
+
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+        internal ContactHelper Create(ContactData contact)
         {
             InitContactCreation();
             FillContactForm(contact);
             SubmitContactCreation();
-            ReternToHomePage(); 
+            ReternToHomePage();
+
+            return this;
         }
 
         public ContactHelper InitContactCreation()
