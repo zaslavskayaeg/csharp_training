@@ -26,8 +26,7 @@ namespace WebAddressbookTests
 
         internal ContactHelper Modify(ContactData contact, int i)
         {
-            SelectContact(i);
-            InitContactModification();
+            InitContactModification(i);
             FillContactForm(contact);
             SubmitСontactModification();
             ReternToHomePage();
@@ -42,9 +41,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        private ContactHelper InitContactModification()
+        private ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img")).Click();
+            driver.FindElement(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry']["+ index +"]/td[8]/a/img")).Click();
 
             return this;
         }
