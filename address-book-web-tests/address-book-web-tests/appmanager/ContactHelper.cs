@@ -18,6 +18,14 @@ namespace WebAddressbookTests
 
         public ContactHelper Remove(int i)
         {
+            manager.Navigator.GotoHomePage();
+            if (! IsElementPresent(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry'][" + i + "]/td[8]/a/img")))
+            {
+                ContactData contact = new ContactData("", "");
+
+                Create(contact);
+            }
+
             SelectContact(i);
             RemoveContact();
 

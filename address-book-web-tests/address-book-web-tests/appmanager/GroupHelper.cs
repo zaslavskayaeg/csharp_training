@@ -45,6 +45,13 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToGroupsPage();
 
+            if (! IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + i + "]")))
+            {
+                GroupData group = new GroupData("");
+
+                Create(group);
+            }
+
             SelectGroup(i);
             RemoveGroup();
             ReturnToGroupsPage();
