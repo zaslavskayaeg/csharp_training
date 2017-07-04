@@ -7,15 +7,11 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    [SetUpFixture]
-    public class TestSuteFixture
+   public class AuthTestBase : TestBase
     {
         [SetUp]
-        public void InitApplicationManager () 
+        public void SetupLogin()
         {
-            ApplicationManager app = ApplicationManager.GetInstance();
-
-            app.Navigator.GotoHomePage();
             app.Auth.Login(new AccountData("admin", "secret"));
         }
     }
