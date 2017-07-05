@@ -19,21 +19,27 @@ namespace WebAddressbookTests
         public ContactHelper Remove(int i)
         {
             manager.Navigator.GotoHomePage();
-            if (! IsElementPresent(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry'][" + i + "]/td[8]/a/img")))
-            {
-                ContactData contact = new ContactData("", "");
-
-                Create(contact);
-            }
-
+            CheckContactExist();
             SelectContact(i);
             RemoveContact();
 
             return this;
         }
 
+        private void CheckContactExist()
+        {
+            if (!IsElementPresent(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry']")))
+            {
+                ContactData contact = new ContactData("", "");
+
+                Create(contact);
+            }
+        }
+
         internal ContactHelper Modify(ContactData contact, int i)
         {
+            manager.Navigator.GotoHomePage();
+            CheckContactExist();
             InitContactModification(i);
             FillContactForm(contact);
             SubmitСontactModification();
