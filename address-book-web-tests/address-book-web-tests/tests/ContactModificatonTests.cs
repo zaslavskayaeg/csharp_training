@@ -15,7 +15,8 @@ namespace WebAddressbookTests
         {
             ContactData contact = new ContactData("Пётр", "Петров");
 
-            app.Contact.Modify(contact, 1);
+            app.Contact.CheckContactExist()
+                .Modify(contact, 1);
         }
     }
 }

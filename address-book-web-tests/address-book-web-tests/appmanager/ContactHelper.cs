@@ -16,34 +16,49 @@ namespace WebAddressbookTests
         {
         }
 
+
+        internal ContactHelper Modify(ContactData contact, int i)
+        {
+            manager.Navigator.GotoHomePage();
+
+            InitContactModification(i);
+            FillContactForm(contact);
+            SubmitСontactModification();
+            ReternToHomePage();
+
+            return this;
+        }
+
         public ContactHelper Remove(int i)
         {
             manager.Navigator.GotoHomePage();
-            CheckContactExist();
+
             SelectContact(i);
             RemoveContact();
 
             return this;
         }
 
-        private void CheckContactExist()
+        internal ContactHelper Create(ContactData contact)
         {
+            InitContactCreation();
+            FillContactForm(contact);
+            SubmitContactCreation();
+            ReternToHomePage();
+
+            return this;
+        }
+
+        public ContactHelper CheckContactExist()
+        {
+            manager.Navigator.GotoHomePage();
+
             if (!IsElementPresent(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry']")))
             {
                 ContactData contact = new ContactData("", "");
 
                 Create(contact);
             }
-        }
-
-        internal ContactHelper Modify(ContactData contact, int i)
-        {
-            manager.Navigator.GotoHomePage();
-            CheckContactExist();
-            InitContactModification(i);
-            FillContactForm(contact);
-            SubmitСontactModification();
-            ReternToHomePage();
 
             return this;
         }
@@ -73,16 +88,6 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
-            return this;
-        }
-
-        internal ContactHelper Create(ContactData contact)
-        {
-            InitContactCreation();
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReternToHomePage();
-
             return this;
         }
 
