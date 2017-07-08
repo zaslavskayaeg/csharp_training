@@ -72,14 +72,14 @@ namespace WebAddressbookTests
 
         private ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry']["+ index +"]/td[8]/a/img")).Click();
+            driver.FindElement(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry']["+ (index + 1) +"]/td[8]/a/img")).Click();
 
             return this;
         }
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
 
             return this;
         }
