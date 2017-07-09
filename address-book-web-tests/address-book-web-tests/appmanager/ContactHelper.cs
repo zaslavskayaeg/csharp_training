@@ -49,6 +49,24 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+
+            manager.Navigator.GotoHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry']"));
+
+            foreach (IWebElement element in elements)
+            {
+                string firstName = element.FindElement(By.XPath("td[2]")).Text;
+                string lastName = element.FindElement(By.XPath("td[3]")).Text;
+
+                contacts.Add(new ContactData(firstName, lastName));
+            }
+
+            return contacts;
+        }
+
         public ContactHelper CheckContactExist()
         {
             manager.Navigator.GotoHomePage();
@@ -72,7 +90,7 @@ namespace WebAddressbookTests
 
         private ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry']["+ (index + 1) +"]/td[8]/a/img")).Click();
+            driver.FindElement(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry'][" + (index + 1) + "]/td[8]/a/img")).Click();
 
             return this;
         }
