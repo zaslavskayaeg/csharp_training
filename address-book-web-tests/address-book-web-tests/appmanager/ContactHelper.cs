@@ -58,8 +58,8 @@ namespace WebAddressbookTests
 
             foreach (IWebElement element in elements)
             {
-                string firstName = element.FindElement(By.XPath("td[2]")).Text;
-                string lastName = element.FindElement(By.XPath("td[3]")).Text;
+                string lastName = element.FindElement(By.XPath("td[2]")).Text;
+                string firstName = element.FindElement(By.XPath("td[3]")).Text;
 
                 contacts.Add(new ContactData(firstName, lastName));
             }

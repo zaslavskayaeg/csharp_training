@@ -10,11 +10,24 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactRemovalTests : AuthTestBase
     {
+        [SetUp]
+        public void SetupAppGroupRemovalTest()
+        {
+            app.Contact.CheckContactExist();
+        }
+
         [Test]
         public void ContactRemovalTest()
         {
-            app.Contact.CheckContactExist()
-                .Remove(0);
+            List<ContactData> oldContacts = app.Contact.GetContactList();
+
+            app.Contact.Remove(0);
+
+            List<ContactData> newContacts = app.Contact.GetContactList();
+
+            oldContacts.RemoveAt(0);
+
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
