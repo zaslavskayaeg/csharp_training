@@ -19,20 +19,31 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificatonTest()
         {
-            ContactData contact = new ContactData("Пётр", "Петров");
+            ContactData newData = new ContactData("Пётр", "Петров");
 
             List<ContactData> oldContacts = app.Contact.GetContactList();
+            ContactData oldData = oldContacts[0];
 
-            app.Contact.Modify(contact, 0);
+            app.Contact.Modify(newData, 0);
+
+            Assert.AreEqual(oldContacts.Count, app.Contact.GetContactCount());
 
             List<ContactData> newContacts = app.Contact.GetContactList();
 
-            oldContacts[0] = contact;
+            oldContacts[0] = newData;
 
             oldContacts.Sort();
             newContacts.Sort();
 
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData, contact);
+                }
+            }
         }
     }
 }
