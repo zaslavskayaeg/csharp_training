@@ -36,6 +36,20 @@ namespace WebAddressbookTests
             };
         }
 
+        public ContactData GetContactInformationFromDetalForm(int index)
+        {
+            manager.Navigator.GotoHomePage();
+            OpenDetalForm(index);
+
+            string contactInfo = driver.FindElement(By.Id("content")).Text;
+
+            return new ContactData("", "")
+            {
+                ContactInfo = contactInfo
+            };
+        }
+
+
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GotoHomePage();
@@ -43,6 +57,17 @@ namespace WebAddressbookTests
 
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+
+            string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value");
+            string nickName = driver.FindElement(By.Name("nickname")).GetAttribute("value");
+            string title = driver.FindElement(By.Name("title")).GetAttribute("value");
+            string company = driver.FindElement(By.Name("company")).GetAttribute("value");
+            string fax = driver.FindElement(By.Name("fax")).GetAttribute("value");
+            string homepage = driver.FindElement(By.Name("homepage")).GetAttribute("value");
+            string address2 = driver.FindElement(By.Name("address2")).GetAttribute("value");
+            string phone2 = driver.FindElement(By.Name("phone2")).GetAttribute("value");
+            string notes = driver.FindElement(By.Name("notes")).GetAttribute("value");
+
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
 
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
@@ -61,8 +86,18 @@ namespace WebAddressbookTests
                 WorkPhone = workPhone,
                 Email = email,
                 Email2 = email2,
-                Email3 = email3
-            };
+                Email3 = email3,
+                Middlename = middleName,
+                Nickname = nickName,
+                Title = title,
+                Company = company,
+                Fax = fax,
+                Homepage = homepage,
+                Address2 = address2,
+                Phone2 = phone2,
+                Notes = notes
+
+        };
         }
 
         internal ContactHelper Modify(ContactData contact, int i)
@@ -153,6 +188,15 @@ namespace WebAddressbookTests
         {
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
+
+            return this;
+        }
+
+        public ContactHelper OpenDetalForm(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
                 .FindElement(By.TagName("a")).Click();
 
             return this;
