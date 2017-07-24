@@ -18,6 +18,10 @@ namespace WebAddressbookTests
             Lastname = lastname;
         }
 
+        public ContactData()
+        {
+        }
+
         public bool Equals(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -284,11 +288,11 @@ namespace WebAddressbookTests
 
         private string ContactInfoList(string firstname, string middlename, string lastname, string nickname, string title, string company, string address)
         {
-            return EndStringInsert(GetNameFull(firstname, middlename, lastname))
+            return (EndStringInsert(GetNameFull(firstname, middlename, lastname))
                         + EndStringInsert(nickname)
                         + EndStringInsert(title)
                         + EndStringInsert(company)
-                        + EndStringInsert(address).Trim();
+                        + EndStringInsert(address)).Trim();
         }
     }
 

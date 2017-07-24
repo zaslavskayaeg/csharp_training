@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Xml;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -40,7 +43,45 @@ namespace WebAddressbookTests
             return contacts;
         }
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        public static IEnumerable<ContactData> GroupDataFromCsvFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            string[] lines = File.ReadAllLines(@"contacts.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                contacts.Add(new ContactData(parts[0], parts[1])
+                {
+                    Middlename = parts[2],
+                    Nickname = parts[3],
+                    Title = parts[4],
+                    Company = parts[5],
+                    Address = parts[6],
+                    HomePhone = parts[7],
+                    MobilePhone = parts[8],
+                    WorkPhone = parts[9],
+                    Fax = parts[10],
+                    Email = parts[11],
+                    Email2 = parts[12],
+                    Email3 = parts[13],
+                    Homepage = parts[14],
+                    Address2 = parts[15],
+                    Phone2 = parts[16],
+                    Notes = parts[17]
+                });
+            }
+            return contacts;
+
+        }
+
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
+        {
+            return (List<ContactData>)
+                new XmlSerializer(typeof(List<ContactData>))
+                .Deserialize(new StreamReader(@"contacts.xml"));
+        }
+
+        [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void ContactCreateonTest(ContactData contact)
         {
              List<ContactData> oldContacts = app.Contact.GetContactList();
@@ -59,7 +100,6 @@ namespace WebAddressbookTests
 
         }
 
- 
         [Test]
         public void BadNameContactCreateonTest()
         {
