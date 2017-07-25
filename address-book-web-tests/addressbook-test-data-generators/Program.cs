@@ -14,12 +14,12 @@ namespace addressbook_test_data_generators
     {
         static void Main(string[] args)
         {
+            string typeOfData = args[0];
+            int count = Convert.ToInt32(args[1]);
+            StreamWriter writer = new StreamWriter(args[2]);
+            string format = args[3];
 
-            int count = Convert.ToInt32(args[0]);
-            StreamWriter writer = new StreamWriter(args[1]);
-            string format = args[2];
-            string typeOfData = args[3];
-            if (typeOfData == "gr")
+            if (typeOfData == "group")
             {
                 List<GroupData> groups = GenerateGroupsList(count);
                 if (format == "csv")
@@ -35,7 +35,7 @@ namespace addressbook_test_data_generators
                     System.Console.Write("Unrecognized format <" + format + ">");
                 }
             }
-            else if (typeOfData == "cont")
+            else if (typeOfData == "contact")
             {
                 List<ContactData> contacts = GenerateContactsList(count);
                 if (format == "csv")
@@ -53,10 +53,10 @@ namespace addressbook_test_data_generators
             }
             else
             {
-                System.Console.Write("Invalid value args[3] = <" + typeOfData + ">." 
+                System.Console.Write("Invalid value args[0] = <" + typeOfData + ">." 
                     + "\r\nPossible values: "
-                    + "\r\n<gr> = Groups; " 
-                    + "\r\n<cont> = Contacts.");
+                    + "\r\n<group> = ContactData type; "
+                    + "\r\n<contacts> = ContactData type.");
             }
 
             writer.Close();

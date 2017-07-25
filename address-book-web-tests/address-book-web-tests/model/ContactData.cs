@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -167,7 +169,7 @@ namespace WebAddressbookTests
             return "P: " + Phone2;
         }
 
-
+        [XmlIgnore]
         public string AllEmails
         {
             get
@@ -243,6 +245,7 @@ namespace WebAddressbookTests
     
         public string Id { get; set; }
 
+        [XmlIgnore]
         public string AllPhones {
             get
             {
@@ -261,6 +264,7 @@ namespace WebAddressbookTests
             }
         }
 
+        [XmlIgnore]
         public string ContactInfo
         {
             get
