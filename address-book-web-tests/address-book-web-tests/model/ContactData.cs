@@ -4,6 +4,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace WebAddressbookTests
@@ -169,6 +170,7 @@ namespace WebAddressbookTests
             return "P: " + Phone2;
         }
 
+        [JsonIgnore]
         [XmlIgnore]
         public string AllEmails
         {
@@ -245,6 +247,7 @@ namespace WebAddressbookTests
     
         public string Id { get; set; }
 
+        [JsonIgnore]
         [XmlIgnore]
         public string AllPhones {
             get
@@ -264,6 +267,7 @@ namespace WebAddressbookTests
             }
         }
 
+        [JsonIgnore]
         [XmlIgnore]
         public string ContactInfo
         {

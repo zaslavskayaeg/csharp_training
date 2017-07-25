@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -81,7 +82,13 @@ namespace WebAddressbookTests
                 .Deserialize(new StreamReader(@"contacts.xml"));
         }
 
-        [Test, TestCaseSource("ContactDataFromXmlFile")]
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                File.ReadAllText(@"contacts.json"));
+        }
+
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void ContactCreateonTest(ContactData contact)
         {
              List<ContactData> oldContacts = app.Contact.GetContactList();
