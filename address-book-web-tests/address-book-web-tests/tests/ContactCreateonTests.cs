@@ -119,7 +119,7 @@ namespace WebAddressbookTests
                     Notes = range.Cells[i, 18].Value
                 });
             }
-            wb.Close(0);
+            wb.Close();
             app.Visible = false;
             app.Quit();
             return contacts;

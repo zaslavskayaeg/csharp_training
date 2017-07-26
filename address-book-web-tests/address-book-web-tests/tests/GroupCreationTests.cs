@@ -77,7 +77,7 @@ namespace WebAddressbookTests
 
                 });
             }
-            wb.Close(0);
+            wb.Close();
             app.Visible = false;
             app.Quit();
             return groups;

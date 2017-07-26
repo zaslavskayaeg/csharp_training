@@ -109,7 +109,7 @@ namespace addressbook_test_data_generators
             String fullPuth = Path.Combine(Directory.GetCurrentDirectory(), filename);
             File.Delete(fullPuth);
             wb.SaveAs(fullPuth);
-            wb.Close(0);
+            wb.Close();
             app.Visible = false;
             app.Quit();
         }
@@ -147,7 +147,7 @@ namespace addressbook_test_data_generators
             String fullPuth = Path.Combine(Directory.GetCurrentDirectory(), filename);
             File.Delete(fullPuth);
             wb.SaveAs(fullPuth);
-            wb.Close(0);
+            wb.Close();
             app.Visible = false;
             app.Quit();
         }
