@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using Excel = Microsoft.Office.Interop.Excel;
 using NUnit.Framework;
 
 namespace WebAddressbookTests
@@ -86,6 +87,42 @@ namespace WebAddressbookTests
         {
             return JsonConvert.DeserializeObject<List<ContactData>>(
                 File.ReadAllText(@"contacts.json"));
+        }
+        public static IEnumerable<ContactData> GroupDataFromExcelFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            Excel.Application app = new Excel.Application();
+            Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"contacts.xlsx"));
+            Excel.Worksheet sheet = wb.ActiveSheet;
+            Excel.Range range = sheet.UsedRange;
+            for (int i = 1; i <= range.Rows.Count; i++)
+            {
+                contacts.Add(new ContactData()
+                {
+                    Firstname = range.Cells[i, 1].Value,
+                    Lastname = range.Cells[i, 2].Value,
+                    Middlename = range.Cells[i, 3].Value,
+                    Nickname = range.Cells[i, 4].Value,
+                    Title = range.Cells[i, 5].Value,
+                    Company = range.Cells[i, 6].Value,
+                    Address = range.Cells[i, 7].Value,
+                    HomePhone = range.Cells[i, 8].Value,
+                    MobilePhone = range.Cells[i, 9].Value,
+                    WorkPhone = range.Cells[i, 10].Value,
+                    Fax = range.Cells[i, 11].Value,
+                    Email = range.Cells[i, 12].Value,
+                    Email2 = range.Cells[i, 13].Value,
+                    Email3 = range.Cells[i, 14].Value,
+                    Homepage = range.Cells[i, 15].Value,
+                    Address2 = range.Cells[i, 16].Value,
+                    Phone2 = range.Cells[i, 17].Value,
+                    Notes = range.Cells[i, 18].Value
+                });
+            }
+            wb.Close(0);
+            app.Visible = false;
+            app.Quit();
+            return contacts;
         }
 
         [Test, TestCaseSource("ContactDataFromJsonFile")]
