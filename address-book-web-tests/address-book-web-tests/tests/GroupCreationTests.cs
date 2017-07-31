@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 using NUnit.Framework;
 
@@ -124,5 +125,20 @@ namespace WebAddressbookTests
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
-    }
+
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime sturt = DateTime.Now;
+            List<GroupData> fromUi = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(sturt));
+
+            sturt = DateTime.Now;
+            List<GroupData> fromDb = GroupData.GetAll();
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(sturt));
+
+        }
+        }
 }

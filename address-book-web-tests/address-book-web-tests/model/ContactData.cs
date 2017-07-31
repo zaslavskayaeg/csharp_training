@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace WebAddressbookTests
 {
+    [Table(Name = "addressbook")]
     public class ContactData  : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string allEmails;
@@ -209,42 +211,61 @@ namespace WebAddressbookTests
             return "\r\n" + entry;
         }
 
+        [Column(Name = "firstname")]
         public string Firstname { get; set; }
 
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
 
+        [Column(Name = "middlename")]
         public string Middlename { get; set; }
 
+        [Column(Name = "nickname")]
         public string Nickname { get; set; }
 
+        [Column(Name = "title")]
         public string Title { get; set; }
 
+        [Column(Name = "company")]
         public string Company { get; set; }
 
+        [Column(Name = "address")]
         public string Address { get; set; }
 
+        [Column(Name = "home")]
         public string HomePhone { get; set; }
 
+        [Column(Name = "mobile")]
         public string MobilePhone { get; set; }
 
+        [Column(Name = "work")]
         public string WorkPhone { get; set; }
 
+        [Column(Name = "fax")]
         public string Fax { get; set; }
 
+        [Column(Name = "email")]
         public string Email { get; set; }
 
+        [Column(Name = "email2")]
         public string Email2 { get; set; }
 
+        [Column(Name = "email3")]
         public string Email3 { get; set; }
 
+        [Column(Name = "homepage")]
         public string Homepage { get; set; }
 
+        [Column(Name = "address2")]
         public string Address2 { get; set; }
 
+        [Column(Name = "phone2")]
         public string Phone2 { get; set; }
 
+        [Column(Name = "notes")]
         public string Notes { get; set; }
-    
+
+        [Column(Name = "id"), PrimaryKey, Identity]
         public string Id { get; set; }
 
         [JsonIgnore]
