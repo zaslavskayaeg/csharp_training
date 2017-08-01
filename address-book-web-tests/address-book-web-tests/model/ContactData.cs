@@ -323,6 +323,14 @@ namespace WebAddressbookTests
                         + EndStringInsert(company)
                         + EndStringInsert(address)).Trim();
         }
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Contucts select g).ToList();
+            }
+        }
     }
 
 }

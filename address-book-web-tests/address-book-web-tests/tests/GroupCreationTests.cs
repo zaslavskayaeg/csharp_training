@@ -127,7 +127,7 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void TestDBConnectivity()
+        public void TestDBConnectivityGroups()
         {
             DateTime sturt = DateTime.Now;
             List<GroupData> fromUi = app.Groups.GetGroupList();

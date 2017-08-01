@@ -162,5 +162,20 @@ namespace WebAddressbookTests
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
         }
+
+        [Test]
+        public void TestDBConnectivityContacts()
+        {
+            DateTime sturt = DateTime.Now;
+            List<ContactData> fromUi = app.Contact.GetContactList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(sturt));
+
+            sturt = DateTime.Now;
+            List<ContactData> fromDb = ContactData.GetAll();
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(sturt));
+
+        }
     }
 }
