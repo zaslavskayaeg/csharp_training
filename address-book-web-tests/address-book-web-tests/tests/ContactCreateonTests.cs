@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactCreateonTests : AuthTestBase
+    public class ContactCreateonTests : ContactTestBase
     {
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
@@ -88,7 +88,7 @@ namespace WebAddressbookTests
             return JsonConvert.DeserializeObject<List<ContactData>>(
                 File.ReadAllText(@"contacts.json"));
         }
-        public static IEnumerable<ContactData> GroupDataFromExcelFile()
+        public static IEnumerable<ContactData> ContactDataFromExcelFile()
         {
             List<ContactData> contacts = new List<ContactData>();
             Excel.Application app = new Excel.Application();
@@ -125,16 +125,16 @@ namespace WebAddressbookTests
             return contacts;
         }
 
-        [Test, TestCaseSource("ContactDataFromJsonFile")]
+        [Test, TestCaseSource("ContactDataFromExcelFile")]
         public void ContactCreateonTest(ContactData contact)
         {
-             List<ContactData> oldContacts = app.Contact.GetContactList();
+             List<ContactData> oldContacts = ContactData.GetAll();
 
             app.Contact.Create(contact);
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contact.GetContactCount());
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.Add(contact);
             oldContacts.Sort();
@@ -149,13 +149,13 @@ namespace WebAddressbookTests
         {
             ContactData contact = new ContactData("a'a", "bb");
 
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             app.Contact.Create(contact);
 
             Assert.AreEqual(oldContacts.Count + 1, app.Contact.GetContactCount());
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.Add(contact);
             oldContacts.Sort();

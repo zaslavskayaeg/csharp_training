@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    class ContactModificatonTests : AuthTestBase
+    class ContactModificatonTests : ContactTestBase
     {
         [SetUp]
         public void SetupAppGroupRemovalTest()
@@ -21,16 +21,22 @@ namespace WebAddressbookTests
         {
             ContactData newData = new ContactData("Пётр", "Петров");
 
-            List<ContactData> oldContacts = app.Contact.GetContactList();
-            ContactData oldData = oldContacts[0];
+            List<ContactData> oldContacts = ContactData.GetAll();
+            foreach (ContactData contact in oldContacts)
+            { System.Console.Out.WriteLine("old "+contact.Firstname+" "+ contact.Lastname); }
+            ContactData toBeModified = oldContacts[0];
 
-            app.Contact.Modify(newData, 0);
+            app.Contact.Modify(newData, toBeModified);
 
             Assert.AreEqual(oldContacts.Count, app.Contact.GetContactCount());
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
+            foreach (ContactData contact in newContacts)
+            { System.Console.Out.WriteLine("new " + contact.Firstname + " " + contact.Lastname); }
 
             oldContacts[0] = newData;
+            foreach (ContactData contact in oldContacts)
+            { System.Console.Out.WriteLine("oldmodified " + contact.Firstname + " " + contact.Lastname); }
 
             oldContacts.Sort();
             newContacts.Sort();
@@ -39,9 +45,10 @@ namespace WebAddressbookTests
 
             foreach (ContactData contact in newContacts)
             {
-                if (contact.Id == oldData.Id)
+                if (contact.Id == toBeModified.Id)
                 {
-                    Assert.AreEqual(newData, contact);
+                    Assert.AreEqual(newData.Firstname, contact.Firstname);
+                    Assert.AreEqual(newData.Lastname, contact.Lastname);
                 }
             }
         }
