@@ -268,6 +268,9 @@ namespace WebAddressbookTests
         [Column(Name = "id"), PrimaryKey, Identity]
         public string Id { get; set; }
 
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; }
+
         [JsonIgnore]
         [XmlIgnore]
         public string AllPhones {
@@ -328,7 +331,7 @@ namespace WebAddressbookTests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from g in db.Contucts select g).ToList();
+                return (from g in db.Contucts where g.Deprecated == null select g).ToList();
             }
         }
     }

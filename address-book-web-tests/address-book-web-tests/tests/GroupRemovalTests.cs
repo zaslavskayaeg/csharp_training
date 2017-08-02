@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
         [SetUp]
         public void SetupAppGroupRemovalTest()
@@ -21,15 +21,16 @@ namespace WebAddressbookTests
         public void GroupRemovalTest()
         {
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
-            app.Groups.Remove(0);
+            GroupData toBeRemoved = oldGroups[0];
+
+            app.Groups.Remove(toBeRemoved);
 
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
 
-            GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0);
 
             Assert.AreEqual(oldGroups, newGroups);
@@ -37,7 +38,7 @@ namespace WebAddressbookTests
             foreach (GroupData group in newGroups)
             {
                 //Console.Out.Write("ИД текущего контакта <" + group.Id + "> не равно ИД удалённого контакта <" + toBeRemoved.Id + ">" + '\n');
-                Assert.AreNotEqual(toBeRemoved.Id, group.Id);
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
             }
         }
     }

@@ -19,15 +19,15 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
-            app.Contact.Remove(0);
+            ContactData toBeRemoved = oldContacts[0];
+
+            app.Contact.Remove(toBeRemoved);
 
             Assert.AreEqual(oldContacts.Count - 1, app.Contact.GetContactCount());
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
-
-            ContactData toBeRemoved = oldContacts[0];
+            List<ContactData> newContacts = ContactData.GetAll();
 
             oldContacts.RemoveAt(0);
 
@@ -36,7 +36,7 @@ namespace WebAddressbookTests
             foreach (ContactData contact in newContacts)
             {
                 //Console.Out.Write("ИД текущего контакта <"+contact.Id+"> <> ИД удалённого контакта <"+toBeRemoved.Id+">"+'\n');
-                Assert.AreNotEqual(toBeRemoved.Id, contact.Id);
+                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
             }
         }
     }
