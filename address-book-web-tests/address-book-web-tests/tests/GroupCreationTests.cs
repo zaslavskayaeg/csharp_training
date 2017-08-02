@@ -129,16 +129,10 @@ namespace WebAddressbookTests
         [Test]
         public void TestDBConnectivityGroups()
         {
-            DateTime sturt = DateTime.Now;
-            List<GroupData> fromUi = app.Groups.GetGroupList();
-            DateTime end = DateTime.Now;
-            System.Console.Out.WriteLine(end.Subtract(sturt));
-
-            sturt = DateTime.Now;
-            List<GroupData> fromDb = GroupData.GetAll();
-            end = DateTime.Now;
-            System.Console.Out.WriteLine(end.Subtract(sturt));
-
+           foreach(ContactData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                System.Console.Out.WriteLine(contact.Deprecated);
+            }
         }
         }
 }
