@@ -124,7 +124,7 @@ namespace WebAddressbookTests
 
             if (!IsElementPresent(By.Name("selected[]")))
             {
-                GroupData group = new GroupData("");
+                GroupData group = new GroupData("Group1");
 
                 Create(group);
             }

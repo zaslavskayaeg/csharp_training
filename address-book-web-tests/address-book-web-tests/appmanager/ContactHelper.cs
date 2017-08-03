@@ -16,6 +16,16 @@ namespace WebAddressbookTests
         {
         }
 
+        internal void CheckAllContactsExist(GroupData group)
+        {
+            if(ContactData.GetAll().Except(group.GetContacts()).Count()==0)
+            {
+                ContactData contact = group.GetContacts().First();
+
+                RemoveContactFromGroup(contact, group);
+            }
+        }
+
         public ContactData GetContactInformationFromTable(int index)
         {
             manager.Navigator.GotoHomePage();
@@ -34,6 +44,16 @@ namespace WebAddressbookTests
                 AllPhones = allPhones,
                 AllEmails = allEmails
             };
+        }
+
+        internal void CheckNoContactsExist(GroupData group)
+        {
+            if (group.GetContacts().Count() == 0)
+            {
+                ContactData contact = ContactData.GetAll().First();
+
+                AddContactToGroup(contact, group);
+            }
         }
 
         public void RemoveContactFromGroup(ContactData contact, GroupData group)
@@ -241,7 +261,7 @@ namespace WebAddressbookTests
 
             if (!IsElementPresent(By.XPath(".//*[@id='maintable']/tbody/tr[@name='entry']")))
             {
-                ContactData contact = new ContactData("", "");
+                ContactData contact = new ContactData("Firstname1", "Lastname1");
 
                 Create(contact);
             }
