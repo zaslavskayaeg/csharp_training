@@ -37,6 +37,25 @@ namespace addressbook_tests_autoit
             return list;
         }
 
+        public void Remove(GroupData toBeRemoved)
+        {
+            OpenGroupsDialogue();
+
+            CloseGroupsDialogue();
+
+        }
+
+        public int GetGroupCount()
+        {
+            OpenGroupsDialogue();
+            int count = int.Parse(aux.ControlTreeView(
+                GROUPWINTITLE, "", "WindowsForms10.SysTreeView32.app.0.2c908d51",
+                "GetItemCount", "#0", ""));
+            CloseGroupsDialogue();
+
+            return count;
+        }
+
         public void Add(GroupData newGroup)
         {
             OpenGroupsDialogue();

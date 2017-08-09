@@ -8,7 +8,7 @@ namespace addressbook_tests_autoit
     public class GRoupCreationTests : TestBase
     {
         [Test]
-        public void TestGRoupCreation()
+        public void TestGroupCreation()
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
@@ -18,6 +18,8 @@ namespace addressbook_tests_autoit
             };
 
             app.Groups.Add(newGroup);
+
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Add(newGroup);
