@@ -22,7 +22,9 @@ namespace addressbook_tests_autoit
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
+
             oldGroups.Add(newGroup);
+
             oldGroups.Sort();
             newGroups.Sort();
 

@@ -20,9 +20,7 @@ namespace addressbook_tests_autoit
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            GroupData toBeRemoved = oldGroups[0];
-
-             app.Groups.Remove(toBeRemoved);
+             app.Groups.Remove(0);
 
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
