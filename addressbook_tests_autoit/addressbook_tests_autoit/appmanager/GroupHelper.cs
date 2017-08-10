@@ -71,12 +71,12 @@ namespace addressbook_tests_autoit
             CloseGroupsDialogue();
         }
 
-        public void Remove(int index)
+        public void Remove(int i)
         {
             OpenGroupsDialogue();
             aux.ControlTreeView(
                 GROUPWINTITLE, "", "WindowsForms10.SysTreeView32.app.0.2c908d51",
-                "Select", "#0|#"+ index, "");
+                "Select", "#0|#"+ i, "");
             OpenDeleteGroupDialog();
             CloseDeleteGroupDialog();
 

@@ -13,6 +13,7 @@ namespace addressbook_tests_autoit
 
         private AutoItX3 aux;
         private GroupHelper groupHelper;
+        private ContactHelper contactHelper;
 
         public ApplicationManager()
         {
@@ -42,5 +43,13 @@ namespace addressbook_tests_autoit
             {
                 return groupHelper;
             } }
+
+        public ContactHelper Contacts
+        {
+            get
+            {
+                return contactHelper;
+            }
+        }
     }
 }
