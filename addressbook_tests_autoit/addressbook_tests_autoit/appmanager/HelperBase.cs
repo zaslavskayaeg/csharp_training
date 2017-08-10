@@ -16,7 +16,6 @@ namespace addressbook_tests_autoit
             this.manager = manager;
             WINTITLE = ApplicationManager.WINTITLE;
             this.aux = manager.Aux;
-
         }
     }
 }
