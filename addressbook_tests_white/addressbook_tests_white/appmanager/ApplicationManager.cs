@@ -16,6 +16,7 @@ namespace addressbook_tests_white
 
 
         private GroupHelper groupHelper;
+        private ContactHelper contactHelper;
 
         public ApplicationManager()
         {
@@ -23,6 +24,7 @@ namespace addressbook_tests_white
             MainWindow = app.GetWindow(WINTITLE);
 
             groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
         }
 
         public Window MainWindow { get; private set; }
@@ -38,5 +40,13 @@ namespace addressbook_tests_white
             {
                 return groupHelper;
             } }
+
+        public ContactHelper Contacts
+        {
+            get
+            {
+                return contactHelper;
+            }
+        }
     }
 }
