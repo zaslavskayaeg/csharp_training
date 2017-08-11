@@ -24,6 +24,7 @@ namespace addressbook_tests_autoit
             aux.WinWaitActive(WINTITLE);
 
             groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
         }
         public void Stop()
         {
