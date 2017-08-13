@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TestStack.White;
+using TestStack.White.WindowsAPI;
+using TestStack.White.UIItems;
+using TestStack.White.InputDevices;
+using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.TreeItems;
+using TestStack.White.UIItems.WindowItems;
+using System.Windows.Automation;
 
 /*using System;
 using System.Collections.Generic;
@@ -52,21 +60,13 @@ namespace addressbook_tests_white
         public List<ContactData> GetContactList()
         {
             List<ContactData> list = new List<ContactData>();
-
-           int count = GetContactCount();
-
-            for (int i = 0; i < count; i++)
+            Tree tree = dialogue.Get<Tree>("uxAddressTreeView");
+            TreeNode root = tree.Nodes[0];
+            foreach (TreeNode item in root.Nodes)
             {
-                string firstName = aux.ControlListView(
-                    WINTITLE, "", "WindowsForms10.Window.8.app.0.2c908d510",
-                    "GetText", i.ToString(),"0");
-                string lastName = aux.ControlListView(
-                    WINTITLE, "", "WindowsForms10.Window.8.app.0.2c908d510",
-                    "GetText", i.ToString(), "1");
-                list.Add(new ContactData()
+                list.Add(new GroupData()
                 {
-                    Firstname = firstName,
-                    Lastname = lastName
+                    Name = item.Text
                 });
             }
             return list;
