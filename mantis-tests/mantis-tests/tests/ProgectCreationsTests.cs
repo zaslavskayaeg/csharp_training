@@ -10,18 +10,19 @@ namespace mantis_tests
 {
     [TestFixture]
     public class ProgectCreateonTests : AuthTestBase
-    {      
-
+    {
         [Test]
         public void ProgectCreateonTest()
         {
-            List<ProgectData> oldProgects = app.Progects.GetProgectList();
-
             ProgectData progect = new ProgectData()
             {
-                Name = "Progect11",
+                Name = "Progect1",
                 Description = ""
             };
+
+            app.Progects.DeleteIfSuchProgectExist(progect);
+
+            List<ProgectData> oldProgects = app.Progects.GetProgectList();
 
             app.Progects.Create(progect);
 

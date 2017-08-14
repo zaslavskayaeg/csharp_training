@@ -15,13 +15,33 @@ namespace mantis_tests
 
         public void OpenManagmentMenu ()
         {
-            driver.FindElements(By.CssSelector(".menu-text"))[6].Click();
+            if (!IsElementPresent(By.XPath("//div[@id='sidebar']/ul/li[@class='active']/a" +
+                "/span[contains(text(),'управление')]")))
+            {
+                driver.FindElement(By.XPath("//div[@id='sidebar']/ul/li/a" +
+                    "/span[contains(text(),'управление')]")).Click();
+            }
+
         }
 
         public void GoToProgectTab()
         {
-            driver.FindElements(By.CssSelector(".nav-tabs>li>a"))[2].Click();
+            OpenManagmentMenu();
+            if (!IsElementPresent(By.XPath("//div[@id='main-container']/div[2]/div[2]/div" +
+                "/ul/li[@class='active']/a[contains(text(),'Управление проектами')]")))
+            {
+                driver.FindElement(By.XPath("//div[@id='main-container']/div[2]/div[2]/div" +
+                "/ul/li/a[contains(text(),'Управление проектами')]")).Click();
+            }
+
         }
 
+        public void OpenMainPage()
+        {
+            if(driver.Url != "http://localhost/mantisbt-2.5.1/login_page.php")
+            {
+                manager.Driver.Url ="http://localhost/mantisbt-2.5.1/login_page.php";
+            }
+        }
     }
 }

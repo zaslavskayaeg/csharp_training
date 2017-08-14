@@ -23,6 +23,7 @@ namespace mantis_tests
                 }
                 Logout();
             }
+            manager.Navigator.OpenMainPage();
             Type(By.Id("username"), account.Name);
             driver.FindElement(By.CssSelector(".btn-success")).Click();
             Type(By.Id("password"), account.Password);
@@ -33,13 +34,14 @@ namespace mantis_tests
         {
             if (IsLoggedIn())
             {
-                driver.FindElement(By.LinkText("Logout")).Click();
+                driver.FindElement(By.XPath("//div[@id='navbar-container']/div[2]/ul/li[3]/a/i[2]")).Click();
+                driver.FindElement(By.LinkText("выход")).Click();
             }
         }
 
         public bool IsLoggedIn()
         {
-            return IsElementPresent(By.Name("logout"));
+            return IsElementPresent(By.CssSelector("span.user-info"));
         }
 
         public bool IsLoggedIn(AccountData account)
@@ -51,8 +53,8 @@ namespace mantis_tests
 
         public string GetLoggetUserName()
         {
-            String text = driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text;
-            return text.Substring(1, text.Length - 2);
+            String text = driver.FindElement(By.CssSelector("span.user-info")).Text;
+            return text;
         }
     }
 }
