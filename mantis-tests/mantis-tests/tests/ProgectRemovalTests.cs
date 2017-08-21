@@ -19,15 +19,15 @@ namespace mantis_tests
         [Test]
         public void ProgectRemovalTest()
         {
-            List<ProgectData> oldProgects = app.Progects.GetProgectList();
+            List<ProjectData> oldProgects = app.Progects.GetProgectList();
 
-            ProgectData toBeRemoved = oldProgects[0];
+            ProjectData toBeRemoved = oldProgects[0];
 
             app.Progects.Remove(toBeRemoved);
 
             Assert.AreEqual(oldProgects.Count - 1, app.Progects.GetProgectCount());
 
-            List<ProgectData> newProgects = app.Progects.GetProgectList();
+            List<ProjectData> newProgects = app.Progects.GetProgectList();
 
             oldProgects.RemoveAt(0);
 

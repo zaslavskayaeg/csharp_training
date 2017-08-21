@@ -14,7 +14,7 @@ namespace mantis_tests
         [Test]
         public void ProgectCreateonTest()
         {
-            ProgectData progect = new ProgectData()
+            ProjectData progect = new ProjectData()
             {
                 Name = "Progect1",
                 Description = ""
@@ -22,13 +22,13 @@ namespace mantis_tests
 
             app.Progects.DeleteIfSuchProgectExist(progect);
 
-            List<ProgectData> oldProgects = app.Progects.GetProgectList();
+            List<ProjectData> oldProgects = app.Progects.GetProgectList();
 
             app.Progects.Create(progect);
 
             Assert.AreEqual(oldProgects.Count + 1, app.Progects.GetProgectCount());
 
-            List<ProgectData> newProgects = app.Progects.GetProgectList();
+            List<ProjectData> newProgects = app.Progects.GetProgectList();
 
             oldProgects.Add(progect);
             oldProgects.Sort();

@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 namespace mantis_tests
 {
 
-    public class ProgectData : IEquatable<ProgectData>, IComparable<ProgectData>
+    public class ProjectData : IEquatable<ProjectData>, IComparable<ProjectData>
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public ProgectData()
+        public ProjectData()
         {
         }
 
-        public bool Equals(ProgectData other)
+        public bool Equals(ProjectData other)
         {
             if (Object.ReferenceEquals(other, null))
             {
@@ -31,10 +32,10 @@ namespace mantis_tests
 
         public override string ToString()
         {
-            return "project name = <" + Name + ">";
+            return "project Id = <" + Id + ">"+ "project name = <" + Name + ">";
         }
 
-        public int CompareTo(ProgectData other)
+        public int CompareTo(ProjectData other)
         {
             if (Object.ReferenceEquals(other, null))
             {
