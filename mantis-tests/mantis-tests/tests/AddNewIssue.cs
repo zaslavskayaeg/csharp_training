@@ -18,7 +18,7 @@ namespace mantis_tests
                 Name = "administrator", Password = "root"
         };
             ProjectData project = new ProjectData() {
-                Id = "13"
+                Id = "28"
         };
         IssueData issue = new IssueData() {
             Summary = "some short text",
